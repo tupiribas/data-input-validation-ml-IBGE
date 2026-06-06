@@ -1,0 +1,15 @@
+# 1. Ambientes Virtuais (Partilhamos apenas o requirements.txt)
+.venv/
+venv/
+env/
+
+# 2. Dados (O nosso isolamento de segurança e controlo de peso)
+data/
+
+# 3. Segredos e Configurações Locais (Regra de Ouro da Segurança)
+.env
+
+# 4. Ficheiros de Cache do Python e Jupyter
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
