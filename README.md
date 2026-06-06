@@ -31,3 +31,52 @@ Este projeto segue as melhores práticas de Engenharia de Machine Learning, gara
     ```bash
       pip install -r requirements.txt
     ```
+
+## ⚔️ Exemplo de uso:
+
+Para garantir que os dados do IBGE estejam íntegros, utilizamos o contrato `MunicipioIBGE`. Se um dado inválido for inserido, o Pydantic levantará um erro automaticamente, protegendo seu pipeline:
+
+
+```python
+from src.data.validador import MunicipioIBGE
+from pydantic import ValidationError
+
+# Exemplo com o dado valido
+try:
+    municipio = MunicipioIBGE(
+        codigo_municipio=2927408,
+        nome_municipio='Salvador',
+        populacao=259000000
+    )
+    print('Dados validados com Sucesso!!')
+except ValidationError as err:
+    print('Erro na validação dos dados: ERROR VALIDAÇÃO DADOS 001:', err)
+
+# Exemplo com o dado INVALIDO (população)
+try:
+    municipio = MunicipioIBGE(
+        codigo_municipio=2927408,
+        nome_municipio='Salvador',
+        populacao=-259000000
+    )
+except ValidationError as err:
+    print('Erro na validação dos dados: ERROR VALIDAÇÃO DADOS 002:', err)
+```
+
+## 🚀 Como rodar este exemplo
+
+1. **Verificar se o ambiente está ativo:**
+    
+    ```bash
+      venv\Scripts\activate
+    ```
+2. **Instalando as Dependências:**
+    ```bash
+      pip install -r requirements.txt
+    ```
+3. **Execute o programa para realizar um teste rápido:**
+    ```bash
+        python teste_rapido.py
+    ```
+4. **Resultado do teste:**
+    ![alt text](img/teste-rapido-resultado.png)
